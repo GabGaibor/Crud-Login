@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Usuarios')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: navbar}"></header>
+
+<main class="container">
+    <div class="page-header">
+        <h1>Usuarios</h1>
+        <a th:href="@{/productos}" class="btn btn-secondary">Volver a productos</a>
+    </div>
+
+    <p>Las contraseñas se guardan encriptadas con <strong>BCrypt</strong> (hash irreversible con salt).
+       Nunca se almacenan en texto plano.</p>
+
+    <div class="card table-wrap">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Usuario</th>
+                <th>Nombre</th>
+                <th>Rol</th>
+                <th>Contraseña almacenada (hash)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="u : ${usuarios}">
+                <td th:text="${u.id}">1</td>
+                <td th:text="${u.username}">admin</td>
+                <td th:text="${u.nombre}">Nombre</td>
+                <td th:text="${u.rol}">ADMIN</td>
+                <td><code th:text="${u.password}" style="word-break: break-all;">hash</code></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head(titulo)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${titulo} + ' | CRUD MVC'">CRUD MVC</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header th:fragment="navbar" class="navbar">
+    <a th:href="@{/productos}" class="brand">CRUD MVC</a>
+    <div class="nav-right" sec:authorize="isAuthenticated()">
+        <a th:href="@{/usuarios}" style="color:#fff;">Usuarios</a>
+        <span>Hola, <strong sec:authentication="name">usuario</strong></span>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-danger">Cerrar sesión</button>
+        </form>
+    </div>
+</header>
+
+<div th:fragment="alertas">
+    <div th:if="${mensaje}" class="alert alert-success" th:text="${mensaje}"></div>
+    <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+</div>
+</body>
+</html>
